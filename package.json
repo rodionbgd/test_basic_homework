@@ -1,0 +1,41 @@
+{
+  "name": "test_basic_homework",
+  "version": "1.0.0",
+  "description": "basic homework test code",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@jest/globals": "^27.0.6",
+    "husky": "^4.3.8",
+    "jest": "^27.0.6",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.3.2"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "*.{html}": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "jest",
+    "js"
+  ],
+  "repository": "github:rodionbgd/test_basic_homework",
+  "author": {
+    "name": "Rodion",
+    "email": "rodionbgd@gmail.com"
+  },
+  "license": "ISC"
+}
