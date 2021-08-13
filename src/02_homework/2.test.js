@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test } = require('@jest/globals');
 const { getMax, getMonth, isCircleInSquare } = require('./2');
 
 describe('Find max number', () => {

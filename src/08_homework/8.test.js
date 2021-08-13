@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test, beforeEach, afterEach } = require('@jest/globals');
 const { getDay, getMinutes, isOlder } = require('./8');
 
 describe('Get day by date', () => {

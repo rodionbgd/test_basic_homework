@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test } = require('@jest/globals');
 const { getSumOfRange, multiplicationTable, getAverageOfOdds } = require('./3');
 
 describe('Get sum of arithmetic progression', () => {

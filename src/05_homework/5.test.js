@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test } = require('@jest/globals');
 const { sumArr, doubleArr, maxMinArr } = require('./5');
 
 describe('Sum array elements', () => {

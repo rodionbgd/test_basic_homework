@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test, beforeEach } = require('@jest/globals');
 const { addFruitUI } = require('./7');
 
 describe('Check interface', () => {

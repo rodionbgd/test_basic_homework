@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test } = require('@jest/globals');
 const { setAge, createAdmin } = require('./4');
 
 describe('Set user age', () => {

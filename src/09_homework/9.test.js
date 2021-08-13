@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test, beforeEach, afterEach } = require('@jest/globals');
 const {
   isRightTriangle,
   getCircleLengthAndSquare,

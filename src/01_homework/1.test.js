@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test } = require('@jest/globals');
 const { sum, getTwoStringsLengths, sumDigitsFromInput } = require('./1');
 
 describe('Sum', () => {

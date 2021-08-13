@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { describe, test } = require('@jest/globals');
 const { diff, isWord, pow } = require('./6');
 
 describe('Get diff between two numbers', () => {
