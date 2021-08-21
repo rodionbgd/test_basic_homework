@@ -1,21 +1,25 @@
 const diff = (num1, num2) => {
-  if (isNaN(num1) || isNaN(num2)) throw new Error('NaN arg');
+  if (Number.isNaN(num1) || Number.isNaN(num2))
+    throw new Error("NaN arg");
   return Math.abs(num1 - num2);
 };
 
-const isWord = str => {
-  const words = str.split(' ');
+const isWord = (str) => {
+  const words = str.split(" ");
   let num = 0;
-  words.map(val => {
+  words.forEach((val) => {
     const nonLetter = val.match(/([^a-zA-Z])/g);
-    if (!nonLetter) num++;
+    if (!nonLetter) num += 1;
   });
-  if (!num) throw new Error('No words');
+  if (!num) throw new Error("No words");
   return num === 1;
 };
 
 function pow(num, power) {
-  if (typeof num !== 'number' || typeof power !== 'number') {
+  if (
+    typeof num !== "number" ||
+    typeof power !== "number"
+  ) {
     return null;
   }
   if (power === 0) return 1;

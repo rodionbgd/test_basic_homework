@@ -1,44 +1,46 @@
 /**
  * @jest-environment jsdom
  */
-const { isDateAddressEmail } = require('./10');
+const { isDateAddressEmail } = require("./10");
 
-describe('Regular expression', () => {
+describe("Regular expression", () => {
   let originalPrompt;
   let prompt;
   beforeEach(() => {
     originalPrompt = window.prompt;
-    prompt = jest.spyOn(window, 'prompt');
+    prompt = jest.spyOn(window, "prompt");
   });
   afterEach(() => {
     window.prompt = originalPrompt;
   });
-  test('Incorrect data', () => {
+  test("Incorrect data", () => {
     const values = [
-      '25.25.2021',
-      '31.11.2021',
-      '!!test@gmail.com',
-      '+8(123)123-22',
+      "25.25.2021",
+      "31.11.2021",
+      "!!test@gmail.com",
+      "+8(123)123-22",
     ];
-    values.map(value => {
+    values.forEach((value) => {
       prompt.mockImplementationOnce(() => value);
-      const log = jest.spyOn(console, 'log');
+      const log = jest.spyOn(console, "log");
       isDateAddressEmail();
-      expect(log).toHaveBeenCalledWith('Invalid data');
+      expect(log).toHaveBeenCalledWith("Invalid data");
     });
   });
-  test('Correct data', () => {
+  test("Correct data", () => {
     const values = [
-      ['30.11.2021', 'date'],
-      ['test@gmail.com', 'email'],
-      ['+8(123)123-22-22', 'telephone'],
-      ['+8(1234)23-22-22', 'telephone'],
+      ["30.11.2021", "date"],
+      ["test@gmail.com", "email"],
+      ["+8(123)123-22-22", "telephone"],
+      ["+8(1234)23-22-22", "telephone"],
     ];
-    values.map(value => {
+    values.forEach((value) => {
       prompt.mockImplementationOnce(() => value[0]);
-      const log = jest.spyOn(console, 'log');
+      const log = jest.spyOn(console, "log");
       isDateAddressEmail();
-      expect(log).toHaveBeenCalledWith(`${value[0]} is ${value[1]}`);
+      expect(log).toHaveBeenCalledWith(
+        `${value[0]} is ${value[1]}`
+      );
     });
   });
 });
