@@ -1,4 +1,4 @@
-const getDay = () => {
+export function getDay() {
   const dateStr = prompt("Enter date DD.MM.YYYY", "");
   const dateArr = dateStr.split(".").reverse();
   if (dateArr.length !== 3) {
@@ -14,12 +14,12 @@ const getDay = () => {
     weekday: "long",
   });
   console.log(day);
-};
+}
 
-const getMinutes = () => {
+export function getMinutes() {
   const date = new Date();
   console.log(date.getHours() * 60 + date.getMinutes());
-};
+}
 
 function checkValue(value) {
   if (Number.isNaN(+value) || +value <= 0) {
@@ -27,11 +27,8 @@ function checkValue(value) {
   }
 }
 
-const isOlder = (person1, person2) => {
-  if (
-    typeof person1 === "undefined" ||
-    typeof person2 === "undefined"
-  )
+export function isOlder(person1, person2) {
+  if (typeof person1 === "undefined" || typeof person2 === "undefined")
     throw new Error("Args < 2");
   const date1 = person1.split(".").reverse();
   const date2 = person2.split(".").reverse();
@@ -57,6 +54,4 @@ const isOlder = (person1, person2) => {
     throw new Error("Invalid Date");
   }
   return date1.join(".") < date2.join(".");
-};
-
-module.exports = { getDay, getMinutes, isOlder };
+}

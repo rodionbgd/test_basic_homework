@@ -1,11 +1,11 @@
-const getSumOfRange = (start, fin) => {
+export function getSumOfRange(start, fin) {
   let result = "Invalid args";
   if (typeof start === "number" && typeof fin === "number")
     result = ((start + fin) * (fin - start)) / 2;
   console.log(result);
-};
+}
 
-const multiplicationTable = (n) => {
+export function multiplicationTable(n) {
   if (typeof n !== "number") {
     console.log("Invalid arg");
     return;
@@ -13,9 +13,9 @@ const multiplicationTable = (n) => {
   for (let i = 1; i < 10; i += 1) {
     console.log(`${n} x ${i} = ${n * i}`);
   }
-};
+}
 
-const getAverageOfOdds = () => {
+export function getAverageOfOdds() {
   let result = prompt("Input value > 0", "");
   if (Number.isNaN(+result)) {
     result = "Value is NaN";
@@ -25,9 +25,4 @@ const getAverageOfOdds = () => {
     result = Math.ceil(+result / 2);
   }
   console.log(result);
-};
-module.exports = {
-  getSumOfRange,
-  multiplicationTable,
-  getAverageOfOdds,
-};
+}

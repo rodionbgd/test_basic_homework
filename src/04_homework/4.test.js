@@ -1,14 +1,9 @@
-/**
- * @jest-environment jsdom
- */
-const { setAge, createAdmin } = require("./4");
+import { setAge, createAdmin } from "./4";
 
 describe("Set user age", () => {
   test("Setting correct age", () => {
     const age = Math.floor(Math.random() * 100);
-    jest
-      .spyOn(window, "prompt")
-      .mockImplementationOnce(() => age);
+    jest.spyOn(window, "prompt").mockImplementationOnce(() => age);
     expect(setAge()).toEqual({
       name: "John",
       age,
@@ -16,18 +11,14 @@ describe("Set user age", () => {
   });
   test("Input <= 0", () => {
     try {
-      jest
-        .spyOn(window, "prompt")
-        .mockImplementation(() => -5);
+      jest.spyOn(window, "prompt").mockImplementation(() => -5);
     } catch (e) {
       expect(setAge()).toThrow("Input number > 0");
     }
   });
   test("Input is NaN", () => {
     try {
-      jest
-        .spyOn(window, "prompt")
-        .mockImplementation(() => "age");
+      jest.spyOn(window, "prompt").mockImplementation(() => "age");
     } catch (e) {
       expect(setAge()).toThrow("Input number");
     }

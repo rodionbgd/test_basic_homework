@@ -1,4 +1,4 @@
-const isRightTriangle = (a, b, c) => {
+export function isRightTriangle(a, b, c) {
   if (
     Number.isNaN(parseFloat(a)) ||
     Number.isNaN(parseFloat(b)) ||
@@ -11,23 +11,23 @@ const isRightTriangle = (a, b, c) => {
   }
   const sides = [a, b, c].sort((num1, num2) => num1 - num2);
   return (
-    (sides[2] ** 2).toFixed(10) ===
-    (sides[0] ** 2 + sides[1] ** 2).toFixed(10)
+    (sides[2] ** 2).toFixed(10) === (sides[0] ** 2 + sides[1] ** 2).toFixed(10)
   );
-};
+}
 
-const getCircleLengthAndSquare = () => {
+export function getCircleLengthAndSquare() {
   const radius = prompt("Enter radius", "");
   if (Number.isNaN(parseFloat(radius)) || +radius <= 0)
     throw new Error("Invalid radius");
   console.log(
-    `Length: ${(2 * Math.PI * +radius).toFixed(
-      10
-    )}, Square: ${(Math.PI * (+radius) ** 2).toFixed(10)}`
+    `Length: ${(2 * Math.PI * +radius).toFixed(10)}, Square: ${(
+      Math.PI *
+      (+radius) ** 2
+    ).toFixed(10)}`
   );
-};
+}
 
-const quadrEquation = (a, b, c) => {
+export function quadrEquation(a, b, c) {
   if (
     Number.isNaN(parseFloat(a)) ||
     Number.isNaN(parseFloat(b)) ||
@@ -45,10 +45,4 @@ const quadrEquation = (a, b, c) => {
   const x1 = (-b + discr) / (2 * a);
   const x2 = (-b - discr) / (2 * a);
   console.log(`x1 = ${x1}, x2 = ${x2}`);
-};
-
-module.exports = {
-  isRightTriangle,
-  getCircleLengthAndSquare,
-  quadrEquation,
-};
+}

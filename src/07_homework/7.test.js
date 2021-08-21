@@ -1,7 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const { addFruitUI } = require("./7");
+import { addFruitUI } from "./7";
 
 describe("Check interface", () => {
   let inputFruits;

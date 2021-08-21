@@ -1,7 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const { sumArr, doubleArr, maxMinArr } = require("./5");
+import { sumArr, doubleArr, maxMinArr } from "./5";
 
 describe("Sum array elements", () => {
   test("Sum 10 digits in array", () => {

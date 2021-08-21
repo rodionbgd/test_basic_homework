@@ -1,7 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const { diff, isWord, pow } = require("./6");
+import { diff, isWord, pow } from "./6";
 
 describe("Get diff between two numbers", () => {
   test("Diff between two numbers", () => {
@@ -19,21 +16,13 @@ describe("Get diff between two numbers", () => {
 
 describe("One word or more", () => {
   test("String with one word", () => {
-    const words = [
-      "f1rst second 345 ...",
-      "one",
-      "1234 ttt 222",
-    ];
+    const words = ["f1rst second 345 ...", "one", "1234 ttt 222"];
     words.forEach((value) => {
       expect(isWord(value)).toBeTruthy();
     });
   });
   test("String with many word", () => {
-    const words = [
-      "first second 345 ...",
-      "one two",
-      "1234 ttt 222 \n ttt",
-    ];
+    const words = ["first second 345 ...", "one two", "1234 ttt 222 \n ttt"];
     words.forEach((value) => {
       expect(isWord(value)).toBeFalsy();
     });

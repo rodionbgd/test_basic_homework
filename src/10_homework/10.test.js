@@ -1,7 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const { isDateAddressEmail } = require("./10");
+import { isDateAddressEmail } from "./10";
 
 describe("Regular expression", () => {
   let originalPrompt;
@@ -38,9 +35,7 @@ describe("Regular expression", () => {
       prompt.mockImplementationOnce(() => value[0]);
       const log = jest.spyOn(console, "log");
       isDateAddressEmail();
-      expect(log).toHaveBeenCalledWith(
-        `${value[0]} is ${value[1]}`
-      );
+      expect(log).toHaveBeenCalledWith(`${value[0]} is ${value[1]}`);
     });
   });
 });

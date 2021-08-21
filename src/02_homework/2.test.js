@@ -1,11 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const {
-  getMax,
-  getMonth,
-  isCircleInSquare,
-} = require("./2");
+import { getMax, getMonth, isCircleInSquare } from "./2";
 
 describe("Find max number", () => {
   const N = 10;
@@ -15,9 +8,7 @@ describe("Find max number", () => {
       const num1 = Math.random();
       const num2 = Math.random();
       getMax(num1, num2);
-      expect(log).toHaveBeenCalledWith(
-        Math.max(num1, num2)
-      );
+      expect(log).toHaveBeenCalledWith(Math.max(num1, num2));
     }
   });
   test("array and digit", () => {
@@ -41,13 +32,12 @@ describe("Get month by value", () => {
   function checkMonth(months) {
     const log = jest.spyOn(console, "log");
     months.forEach((val) => {
-      jest
-        .spyOn(window, "prompt")
-        .mockImplementation(() => val[0]);
+      jest.spyOn(window, "prompt").mockImplementation(() => val[0]);
       getMonth();
       expect(log).toHaveBeenCalledWith(val[1]);
     });
   }
+
   test("get month by proper value", () => {
     const months = [
       ["1", "January"],

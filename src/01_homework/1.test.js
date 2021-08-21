@@ -1,11 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const {
-  sum,
-  getTwoStringsLengths,
-  sumDigitsFromInput,
-} = require("./1");
+import { sum, getTwoStringsLengths, sumDigitsFromInput } from "./1";
 
 describe("Sum", () => {
   test("two digits", () => {
@@ -44,9 +37,7 @@ describe("sumDigitsFromInput", () => {
       ["101", 2],
     ];
     value.forEach((val) => {
-      jest
-        .spyOn(window, "prompt")
-        .mockImplementation(() => val[0]);
+      jest.spyOn(window, "prompt").mockImplementation(() => val[0]);
       const log = jest.spyOn(console, "log");
       sumDigitsFromInput();
       expect(log).toHaveBeenCalledWith(val[1]);
@@ -59,9 +50,7 @@ describe("sumDigitsFromInput", () => {
       ["1a1", "Invalid input"],
     ];
     value.forEach((val) => {
-      jest
-        .spyOn(window, "prompt")
-        .mockImplementation(() => val[0]);
+      jest.spyOn(window, "prompt").mockImplementation(() => val[0]);
       const log = jest.spyOn(console, "log");
       sumDigitsFromInput();
       expect(log).toHaveBeenCalledWith(val[1]);

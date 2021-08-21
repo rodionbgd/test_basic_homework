@@ -5,14 +5,6 @@
   "dependencies": {
     "lodash": "^4.17.21"
   },
-  "scripts": {
-    "test": "jest",
-    "lint": "eslint . && prettier --check .",
-    "lint:fix": "eslint --fix . && prettier --write .",
-    "prepare": "husky install",
-    "dev": "webpack serve --node-env development",
-    "build": "webpack"
-  },
   "devDependencies": {
     "@babel/core": "^7.14.8",
     "@babel/plugin-transform-runtime": "^7.15.0",
@@ -34,6 +26,14 @@
     "webpack": "^5.49.0",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
+    "prepare": "husky install",
+    "dev": "webpack serve --node-env development",
+    "build": "webpack"
   },
   "lint-staged": {
     "*.js": "eslint --fix",

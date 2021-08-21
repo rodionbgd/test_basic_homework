@@ -1,7 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const { getDay, getMinutes, isOlder } = require("./8");
+import { getDay, getMinutes, isOlder } from "./8";
 
 describe("Get day by date", () => {
   let prompt;
@@ -70,9 +67,7 @@ describe("Get minutes of day", () => {
         const log = jest.spyOn(console, "log");
         jest
           .useFakeTimers("modern")
-          .setSystemTime(
-            new Date(`2021-08-08T0${hour}:0${min}:00`)
-          );
+          .setSystemTime(new Date(`2021-08-08T0${hour}:0${min}:00`));
         getMinutes();
         expect(log).toHaveBeenCalledWith(hour * 60 + min);
       }

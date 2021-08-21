@@ -1,11 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const {
-  isRightTriangle,
-  getCircleLengthAndSquare,
-  quadrEquation,
-} = require("./9");
+import { isRightTriangle, getCircleLengthAndSquare, quadrEquation } from "./9";
 
 describe("Check right triangle", () => {
   test("Invalid value of arg", () => {
@@ -61,9 +54,7 @@ describe("Get length and square of circle", () => {
       try {
         prompt.mockImplementationOnce(() => value);
       } catch (e) {
-        expect(getCircleLengthAndSquare()).toThrow(
-          "Invalid radius"
-        );
+        expect(getCircleLengthAndSquare()).toThrow("Invalid radius");
       }
     });
   });
@@ -74,11 +65,10 @@ describe("Get length and square of circle", () => {
       prompt.mockImplementationOnce(() => value);
       getCircleLengthAndSquare();
       expect(log).toHaveBeenCalledWith(
-        `Length: ${(2 * Math.PI * +value).toFixed(
-          10
-        )}, Square: ${(Math.PI * (+value) ** 2).toFixed(
-          10
-        )}`
+        `Length: ${(2 * Math.PI * +value).toFixed(10)}, Square: ${(
+          Math.PI *
+          (+value) ** 2
+        ).toFixed(10)}`
       );
     });
   });
@@ -117,9 +107,7 @@ describe("Get roots of quadratic equation", () => {
     values.forEach((value) => {
       const log = jest.spyOn(console, "log");
       quadrEquation(...value.slice(0, 3));
-      expect(log).toHaveBeenCalledWith(
-        `x1 = ${value[3]}, x2 = ${value[4]}`
-      );
+      expect(log).toHaveBeenCalledWith(`x1 = ${value[3]}, x2 = ${value[4]}`);
     });
   });
 });

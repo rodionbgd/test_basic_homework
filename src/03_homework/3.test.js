@@ -1,11 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const {
-  getSumOfRange,
-  multiplicationTable,
-  getAverageOfOdds,
-} = require("./3");
+import { getSumOfRange, multiplicationTable, getAverageOfOdds } from "./3";
 
 describe("Get sum of arithmetic progression", () => {
   test("correct start and finish", () => {
@@ -39,9 +32,7 @@ describe("Multiplication table", () => {
     for (let i = 1; i < 10; i += 1) {
       multiplicationTable(i);
       for (let j = 1; j < 10; j += 1) {
-        expect(log).toHaveBeenCalledWith(
-          `${i} x ${j} = ${i * j}`
-        );
+        expect(log).toHaveBeenCalledWith(`${i} x ${j} = ${i * j}`);
       }
     }
   });
@@ -56,9 +47,7 @@ describe("Average sum of ddds", () => {
   function checkAverage(values, cb) {
     const log = jest.spyOn(console, "log");
     values.forEach((val) => {
-      jest
-        .spyOn(window, "prompt")
-        .mockImplementationOnce(() => val[0]);
+      jest.spyOn(window, "prompt").mockImplementationOnce(() => val[0]);
       cb();
       expect(log).toHaveBeenCalledWith(val[1]);
     });

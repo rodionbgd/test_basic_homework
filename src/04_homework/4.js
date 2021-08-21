@@ -1,4 +1,4 @@
-const setAge = () => {
+export function setAge() {
   const age = prompt("Input User age", "");
   if (Number.isNaN(+age)) {
     throw Error("Input number");
@@ -10,15 +10,12 @@ const setAge = () => {
   };
   user.age = +age;
   return user;
-};
+}
 
-const createAdmin = (user) => {
-  if (!Object.prototype.hasOwnProperty.call(user, "name"))
-    return null;
+export function createAdmin(user) {
+  if (!Object.prototype.hasOwnProperty.call(user, "name")) return null;
   const admin = { ...user };
   admin.name = "admin";
   admin.role = "admin";
   return admin;
-};
-
-module.exports = { setAge, createAdmin };
+}
