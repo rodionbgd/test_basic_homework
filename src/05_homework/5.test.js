@@ -1,27 +1,27 @@
 import { sumArr, doubleArr, maxMinArr } from "./5";
 
 describe("Sum array elements", () => {
+  let log;
+  beforeEach(() => {
+    log = jest.spyOn(console, "log");
+  });
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   test("Sum 10 digits in array", () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const log = jest.spyOn(console, "log");
     sumArr(arr);
     expect(log).toHaveBeenCalledWith(55);
   });
-  test("Throw length error", () => {
+  const values = [
+    [[1, 2, 3, 4, 5, 6, 7, 8, 9], "length != 10"],
+    [[1, 2, 3, 4, "a", 6, 7, 8, 9, 10], "Value a is NaN"],
+  ];
+  test.each(values)("%p throws %p", (arr, err) => {
     try {
-      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
       sumArr(arr);
     } catch (e) {
-      expect(e.message).toBe("length != 10");
-    }
-  });
-  test("Throw NaN error", () => {
-    const inValue = "a";
-    try {
-      const arr = [1, 2, 3, 4, inValue, 6, 7, 8, 9, 10];
-      sumArr(arr);
-    } catch (e) {
-      expect(e.message).toBe(`Value ${inValue} is NaN`);
+      expect(e.message).toBe(err);
     }
   });
 });
@@ -51,22 +51,15 @@ describe("Max min array elements", () => {
       `Max: ${Math.max(...arr)}; Min: ${Math.min(...arr)}`
     );
   });
-  test("Throw NaN error for the first element", () => {
-    const inValue = "a";
+  const values = [
+    { arr: ["a", 2, 3, 4, 5, 6, 7, 8, 9] },
+    { arr: [1, 2, 3, 4, "a", 6, 7, 8, 9, 10] },
+  ];
+  test.each(values)("$arr throws Value a is NaN", (obj) => {
     try {
-      const arr = [inValue, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      maxMinArr(arr);
+      maxMinArr(obj.arr);
     } catch (e) {
-      expect(e.message).toBe(`Value ${inValue} is NaN`);
-    }
-  });
-  test("Throw NaN error for any element", () => {
-    const inValue = "a";
-    try {
-      const arr = [1, 2, 3, 4, inValue, 6, 7, 8, 9, 10];
-      maxMinArr(arr);
-    } catch (e) {
-      expect(e.message).toBe(`Value ${inValue} is NaN`);
+      expect(e.message).toBe("Value a is NaN");
     }
   });
   test("Throw empty array", () => {

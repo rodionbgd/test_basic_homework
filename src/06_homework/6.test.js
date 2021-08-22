@@ -15,17 +15,13 @@ describe("Get diff between two numbers", () => {
 });
 
 describe("One word or more", () => {
-  test("String with one word", () => {
-    const words = ["f1rst second 345 ...", "one", "1234 ttt 222"];
-    words.forEach((value) => {
-      expect(isWord(value)).toBeTruthy();
-    });
+  let words = ["f1rst second 345 ...", "one", "1234 ttt 222"];
+  test.each(words)("%p contains one word", (string) => {
+    expect(isWord(string)).toBeTruthy();
   });
-  test("String with many word", () => {
-    const words = ["first second 345 ...", "one two", "1234 ttt 222 \n ttt"];
-    words.forEach((value) => {
-      expect(isWord(value)).toBeFalsy();
-    });
+  words = ["first second 345 ...", "one two", "1234 ttt 222 \n ttt"];
+  test.each(words)("%p contains more than a word", (string) => {
+    expect(isWord(string)).toBeFalsy();
   });
   test("Throw no words error", () => {
     try {
@@ -37,21 +33,20 @@ describe("One word or more", () => {
 });
 
 describe("Pow number", () => {
-  test("Pow correct number", () => {
-    const values = [
-      [2, 2, 4],
-      [1, 5, 1],
-      [-1, 2, 1],
-      [0, 2, 0],
-    ];
-    values.forEach((value) => {
-      expect(pow(value[0], value[1])).toBe(value[2]);
-    });
+  let values = [
+    [2, 2, 4],
+    [1, 5, 1],
+    [-1, 2, 1],
+    [0, 2, 0],
+  ];
+  test.each(values)("%p to the power %p is %p", (val, powVal, res) => {
+    expect(pow(val, powVal)).toBe(res);
   });
-  test("Pow incorrect arg", () => {
-    const values = [[2, "2"], [1]];
-    values.forEach((value) => {
-      expect(pow(value[0], value[1])).toBeNull();
-    });
+  values = [
+    [2, "2"],
+    [1, null],
+  ];
+  test.each(values)("%p to the power %p is null", (val, powVal) => {
+    expect(pow(val, powVal)).toBeNull();
   });
 });

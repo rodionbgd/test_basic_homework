@@ -23,17 +23,15 @@ describe("Check interface", () => {
     test("Hidden button at the start", () => {
       expect(addBtn.style.display).toBeFalsy();
     });
-    test("Visible button", () => {
-      const inputValue = [
-        ["orange", "inline"],
-        ["", "none"],
-        ["melon", "inline"],
-      ];
-      inputValue.forEach((value) => {
-        [inputFruits.value] = [...value];
-        inputFruits.dispatchEvent(new Event("input"));
-        expect(addBtn.style.display).toBe(value[1]);
-      });
+    const inputValue = [
+      ["orange", "inline"],
+      ["", "none"],
+      ["melon", "inline"],
+    ];
+    test.each(inputValue)("%p results in btn.style to be %p", (value, res) => {
+      inputFruits.value = value;
+      inputFruits.dispatchEvent(new Event("input"));
+      expect(addBtn.style.display).toBe(res);
     });
   });
   describe("Add fruit", () => {

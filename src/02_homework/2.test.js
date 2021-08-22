@@ -1,64 +1,58 @@
 import { getMax, getMonth, isCircleInSquare } from "./2";
 
 describe("Find max number", () => {
-  const N = 10;
-  test("two digits", () => {
-    const log = jest.spyOn(console, "log");
-    for (let i = 0; i < N; i += 1) {
-      const num1 = Math.random();
-      const num2 = Math.random();
-      getMax(num1, num2);
-      expect(log).toHaveBeenCalledWith(Math.max(num1, num2));
-    }
+  let values = Array.from({ length: 10 }, () =>
+    Array.from({ length: 2 }, () => Math.floor(Math.random() * 20))
+  );
+  let log;
+  beforeEach(() => {
+    log = jest.spyOn(console, "log");
   });
-  test("array and digit", () => {
-    const log = jest.spyOn(console, "log");
-    getMax([1], 2);
-    expect(log).toHaveBeenCalledWith("Invalid args");
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
-  test("string and digit", () => {
-    const log = jest.spyOn(console, "log");
-    getMax("1", 2);
-    expect(log).toHaveBeenCalledWith("Invalid args");
+  test.each(values)("Find max of %p and %p", (num1, num2) => {
+    getMax(num1, num2);
+    expect(log).toHaveBeenCalledWith(Math.max(num1, num2));
   });
-  test("one digit", () => {
-    const log = jest.spyOn(console, "log");
-    getMax(2);
+
+  values = [
+    [[1], 2],
+    ["1", 2],
+    [2, null],
+  ];
+  test.each(values)('Given %p and %p and get "Invalid args"', (num1, num2) => {
+    getMax(num1, num2);
     expect(log).toHaveBeenCalledWith("Invalid args");
   });
 });
 
 describe("Get month by value", () => {
-  function checkMonth(months) {
-    const log = jest.spyOn(console, "log");
-    months.forEach((val) => {
-      jest.spyOn(window, "prompt").mockImplementation(() => val[0]);
-      getMonth();
-      expect(log).toHaveBeenCalledWith(val[1]);
-    });
+  let log;
+  beforeEach(() => {
+    log = jest.spyOn(console, "log");
+  });
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  function checkMonth(month, res) {
+    jest.spyOn(window, "prompt").mockReturnValueOnce(month);
+    getMonth();
+    expect(log).toHaveBeenCalledWith(res);
   }
 
-  test("get month by proper value", () => {
-    const months = [
-      ["1", "January"],
-      ["3", "March"],
-      ["12", "December"],
-    ];
-    checkMonth(months);
-  });
-  test("out-of-range number", () => {
-    const months = [
-      ["0", "Invalid input"],
-      ["13", "Invalid input"],
-    ];
-    checkMonth(months);
-  });
-  test("not a number", () => {
-    const months = [
-      ["", "Invalid input"],
-      ["test", "Invalid input"],
-    ];
-    checkMonth(months);
+  const months = [
+    ["1", "January"],
+    ["3", "March"],
+    ["12", "December"],
+    ["0", "Invalid input"],
+    ["13", "Invalid input"],
+    ["", "Invalid input"],
+    ["test", "Invalid input"],
+  ];
+  test.each(months)("%p month expected to be %p", (month, res) => {
+    checkMonth(month, res);
   });
 });
 
@@ -68,12 +62,13 @@ describe("Circle in square", () => {
     expect(isCircleInSquare(5, 10)).toBeTruthy();
     expect(isCircleInSquare(0, 0)).toBeTruthy();
   });
-  test("one argument", () => {
-    expect(isCircleInSquare(10)).toBeNull();
-    expect(isCircleInSquare(5)).toBeNull();
-  });
-  test("incorrect arguments", () => {
-    expect(isCircleInSquare(10, "5")).toBeNull();
-    expect(isCircleInSquare("1", "5")).toBeNull();
+
+  const values = [
+    [5, null],
+    [10, "5"],
+    ["1", "5"],
+  ];
+  test.each(values)("Invalid args %p and %p, returning null", (arg1, arg2) => {
+    expect(isCircleInSquare(arg1, arg2)).toBeNull();
   });
 });

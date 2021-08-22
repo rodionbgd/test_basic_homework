@@ -6,8 +6,8 @@ export function isRightTriangle(a, b, c) {
   ) {
     throw new Error("Arg is NaN");
   }
-  if (a < 0 || b < 0 || c <= 0) {
-    throw new Error("Arg <=0");
+  if (a <= 0 || b <= 0 || c <= 0) {
+    throw new Error("Arg <= 0");
   }
   const sides = [a, b, c].sort((num1, num2) => num1 - num2);
   return (

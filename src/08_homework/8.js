@@ -33,7 +33,7 @@ export function isOlder(person1, person2) {
   const date1 = person1.split(".").reverse();
   const date2 = person2.split(".").reverse();
   if (date1.length !== 3 || date2.length !== 3) {
-    throw new Error("Arg != 3");
+    throw new Error("Invalid Arg");
   }
   try {
     date1.forEach(checkValue);

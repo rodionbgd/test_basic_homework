@@ -2,61 +2,48 @@ import { getDay, getMinutes, isOlder } from "./8";
 
 describe("Get day by date", () => {
   let prompt;
-  let originalPrompt;
-  const originalConsoleLog = console.log;
+  let log;
   beforeEach(() => {
-    console.log = jest.fn();
-    originalPrompt = window.prompt;
+    log = jest.spyOn(console, "log");
     prompt = jest.spyOn(window, "prompt");
   });
   afterEach(() => {
-    window.prompt = originalPrompt;
+    jest.restoreAllMocks();
   });
-  afterAll(() => {
-    console.log = originalConsoleLog;
+  let values = ["1.2", "1", "1.2.3.4", "1,2,3"];
+  test.each(values)('%p throws "Arg != 3"', (val) => {
+    try {
+      prompt.mockImplementationOnce(() => val);
+    } catch (e) {
+      expect(getDay()).toThrow("Arg != 3");
+    }
   });
-  test("Invalid number of args", () => {
-    const values = ["1.2", "1", "1.2.3.4", "1,2,3"];
-    values.forEach((value) => {
-      try {
-        prompt.mockImplementationOnce(() => value);
-      } catch (e) {
-        expect(getDay()).toThrow("Arg != 3");
-      }
-    });
+  values = [
+    ["11.a.2021", "Invalid value: -a"],
+    ["-11.11.2021", "Invalid value: -11"],
+  ];
+  test.each(values)("%p throws %p", (val, err) => {
+    try {
+      prompt.mockImplementationOnce(() => val);
+    } catch (e) {
+      expect(getDay()).toThrow(err);
+    }
   });
-  test("Invalid value of arg", () => {
-    const values = [
-      ["11.a.2021", "Invalid value: -a"],
-      ["-11.11.2021", "Invalid value: -11"],
-    ];
-    values.forEach((value) => {
-      try {
-        prompt.mockImplementationOnce(() => value[0]);
-      } catch (e) {
-        expect(getDay()).toThrow(value[1]);
-      }
-    });
+
+  values = ["11.33.2021", "221.11.2021"];
+  test.each(values)('%p throws "Invalid date"', (val) => {
+    prompt.mockImplementationOnce(() => val);
+    getDay();
+    expect(log).toHaveBeenCalledWith("Invalid Date");
   });
-  test("Invalid date", () => {
-    const values = ["11.33.2021", "221.11.2021"];
-    values.forEach((value) => {
-      const log = jest.spyOn(console, "log");
-      prompt.mockImplementationOnce(() => value);
-      getDay();
-      expect(log).toHaveBeenCalledWith("Invalid Date");
-    });
-  });
-  test("Correct date", () => {
-    const values = [
-      ["08.09.2021", "Wednesday"],
-      ["01.08.2021", "Sunday"],
-    ];
-    values.forEach((value) => {
-      prompt.mockImplementationOnce(() => value[0]);
-      getDay();
-      expect(console.log).toHaveBeenCalledWith(value[1]);
-    });
+  values = [
+    ["08.09.2021", "Wednesday"],
+    ["01.08.2021", "Sunday"],
+  ];
+  test.each(values)("%p is %p", (val, res) => {
+    prompt.mockImplementationOnce(() => val);
+    getDay();
+    expect(console.log).toHaveBeenCalledWith(res);
   });
 });
 
@@ -76,64 +63,39 @@ describe("Get minutes of day", () => {
 });
 
 describe("Who is older", () => {
-  test("Few args", () => {
-    const values = ["1.2.3", "1.2"];
-    values.forEach((value) => {
-      try {
-        isOlder(value);
-      } catch (e) {
-        expect(e.message).toBe("Args < 2");
-      }
-    });
+  let values = [
+    ["1.2.3", "Args < 2"],
+    ["1.2", "Args < 2"],
+  ];
+  test.each(values)("%p throws %p", (val, err) => {
+    try {
+      isOlder(val);
+    } catch (e) {
+      expect(e.message).toBe(err);
+    }
   });
-  test("Invalid number of args", () => {
-    const values = [
-      ["1.2.2021", "1.2"],
-      ["1.2", "1.2.2021"],
-      ["1.2.3.4", "1.2"],
-      ["1,2,3", "1.2.2021"],
-    ];
-    values.forEach((value) => {
-      try {
-        isOlder(value[0], value[1]);
-      } catch (e) {
-        expect(e.message).toBe("Arg != 3");
-      }
-    });
+  values = [
+    ["1.2.2021", "1.2", "Invalid Arg"],
+    ["1.2", "1.2.2021", "Invalid Arg"],
+    ["1.2.3.4", "1.2", "Invalid Arg"],
+    ["1,2,3", "1.2.2021", "Invalid Arg"],
+    ["11.a.2021", "11.1.2021", "Invalid value: a"],
+    ["-11.11.2021", "1.2.2021", "Invalid value: -11"],
+    ["11.33.2021", "1.2.2021", "Invalid Date"],
+    ["221.11.2021", "1.2.2021", "Invalid Date"],
+  ];
+  test.each(values)("%p and %p throws %p", (val1, val2, err) => {
+    try {
+      isOlder(val1, val2);
+    } catch (e) {
+      expect(e.message).toBe(err);
+    }
   });
-  test("Invalid value of arg", () => {
-    const values = [
-      ["11.a.2021", "11.1.2021", "Invalid value: a"],
-      ["-11.11.2021", "1.2.2021", "Invalid value: -11"],
-    ];
-    values.forEach((value) => {
-      try {
-        isOlder(value[0], value[1]);
-      } catch (e) {
-        expect(e.message).toBe(value[2]);
-      }
-    });
-  });
-  test("Invalid date", () => {
-    const values = [
-      ["11.33.2021", "1.2.2021"],
-      ["221.11.2021", "1.2.2021"],
-    ];
-    values.forEach((value) => {
-      try {
-        isOlder(value[0], value[1]);
-      } catch (e) {
-        expect(e.message).toBe("Invalid Date");
-      }
-    });
-  });
-  test("Correct dates", () => {
-    const values = [
-      ["08.08.2021", "1.12.2021", true],
-      ["09.09.2021", "08.08.2020", false],
-    ];
-    values.forEach((value) => {
-      expect(isOlder(value[0], value[1])).toBe(value[2]);
-    });
+  values = [
+    ["08.08.2021", "1.12.2021", true],
+    ["09.09.2021", "08.08.2020", false],
+  ];
+  test.each(values)("%p is older %p expect to be %p", (val1, val2, res) => {
+    expect(isOlder(val1, val2)).toBe(res);
   });
 });

@@ -1,6 +1,9 @@
 import { setAge, createAdmin } from "./4";
 
 describe("Set user age", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   test("Setting correct age", () => {
     const age = Math.floor(Math.random() * 100);
     jest.spyOn(window, "prompt").mockImplementationOnce(() => age);
@@ -9,18 +12,15 @@ describe("Set user age", () => {
       age,
     });
   });
-  test("Input <= 0", () => {
+  const values = [
+    [-5, "Input number > 0"],
+    ["age", "Input number"],
+  ];
+  test.each(values)("Value %p throw %p", (value, err) => {
     try {
-      jest.spyOn(window, "prompt").mockImplementation(() => -5);
+      jest.spyOn(window, "prompt").mockReturnValueOnce(value);
     } catch (e) {
-      expect(setAge()).toThrow("Input number > 0");
-    }
-  });
-  test("Input is NaN", () => {
-    try {
-      jest.spyOn(window, "prompt").mockImplementation(() => "age");
-    } catch (e) {
-      expect(setAge()).toThrow("Input number");
+      expect(setAge()).toThrow(err);
     }
   });
 });
