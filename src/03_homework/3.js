@@ -1,7 +1,7 @@
 export function getSumOfRange(start, fin) {
   let result = "Invalid args";
   if (typeof start === "number" && typeof fin === "number")
-    result = ((start + fin) * (fin - start)) / 2;
+    result = ((start + fin) * (fin - start + 1)) / 2;
   console.log(result);
 }
 

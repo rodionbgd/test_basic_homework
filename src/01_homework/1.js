@@ -10,10 +10,11 @@ export function getTwoStringsLengths(str1, str2) {
 
 export function sumDigitsFromInput() {
   const answer = prompt("Input 3-digit number", "");
-  if (answer.length !== 3) {
+  if (answer.length !== 3 || Number.isNaN(+answer)) {
     console.log("Invalid input");
+    return;
   }
-  const number = answer.split("").filter((val) => !Number.isNaN(+val));
+  const number = answer.split("");
   if (number.length !== 3) {
     console.log("Invalid input");
   } else {

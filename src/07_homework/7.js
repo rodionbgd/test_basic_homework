@@ -2,7 +2,7 @@ export function addFruitUI() {
   const inputFruits = document.getElementById("input-fruit");
   const addBtn = document.getElementById("add-fruit");
   const fruits = document.getElementById("fruits");
-
+  inputFruits.value = "";
   function addFruit() {
     if (!inputFruits.value) return;
     const p = document.createElement("p");

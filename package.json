@@ -2,9 +2,6 @@
   "name": "test_basic_homework",
   "version": "1.0.0",
   "description": "basic homework test code",
-  "dependencies": {
-    "lodash": "^4.17.21"
-  },
   "devDependencies": {
     "@babel/core": "^7.14.8",
     "@babel/plugin-transform-runtime": "^7.15.0",

@@ -6,7 +6,7 @@ describe("Set user age", () => {
   });
   test("Setting correct age", () => {
     const age = Math.floor(Math.random() * 100);
-    jest.spyOn(window, "prompt").mockImplementationOnce(() => age);
+    jest.spyOn(window, "prompt").mockReturnValueOnce(`${age}`);
     expect(setAge()).toEqual({
       name: "John",
       age,

@@ -8,10 +8,9 @@ export function sumArr(arr) {
 }
 
 export function doubleArr(arr) {
-  const dArr = [];
-  arr.map((val) => {
+  const dArr = arr.map((val) => {
     if (Number.isNaN(val)) throw new Error(`Value ${val} is NaN`);
-    return dArr.push(2 * val);
+    return 2 * val;
   });
   return dArr;
 }
