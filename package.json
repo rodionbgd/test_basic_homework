@@ -1,0 +1,49 @@
+{
+  "name": "test_basic_homework",
+  "version": "1.0.0",
+  "description": "basic homework test code",
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.14.8",
+    "@types/jest": "^26.0.24",
+    "babel-jest": "^27.0.6",
+    "css-loader": "^6.2.0",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.4.0",
+    "html-webpack-plugin": "^5.3.2",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "lint-staged": "^11.1.1",
+    "prettier": "2.3.2",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.49.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
+    "prepare": "husky install",
+    "dev": "webpack serve --node-env development",
+    "build": "webpack"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.{js,css,md,json,yml,html}": "prettier --write"
+  },
+  "keywords": [
+    "jest",
+    "js"
+  ],
+  "repository": "github:rodionbgd/test_basic_homework",
+  "author": {
+    "name": "Rodion",
+    "email": "rodionbgd@gmail.com"
+  },
+  "license": "ISC"
+}
